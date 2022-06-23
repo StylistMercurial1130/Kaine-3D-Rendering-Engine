@@ -1,9 +1,11 @@
+#include <iostream>
+#include <vector>
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include <iostream>
 #include "include/util.h"
 #include "include/shader.h"
-
+#include "include/vertexbuffer.h"
+#include "include/vertex.h"
 
 int main(void)
 {
@@ -35,6 +37,19 @@ int main(void)
         return EXIT_FAILURE;
 
     }
+
+    std::vector<Vertex> vertices = {
+
+        Vertex{glm::vec3(+0.0f,+1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f)},
+        Vertex{glm::vec3(-0.1f,+0.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f)},
+        Vertex{glm::vec3(+0.1f,+0.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f)}
+
+    };
+
+    VertexBuffer VBO_1(vertices);
+
+    
+
 
     Shader shader = Shader("shaders/shader.vert","shaders/shader.frag");
     shader.UseShaderProgram();

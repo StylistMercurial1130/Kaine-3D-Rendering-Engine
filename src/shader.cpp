@@ -24,6 +24,8 @@ Shader::Shader(const std::string& vShaderLocation,const std::string& fShaderLoca
 
 }
 
+Shader::~Shader(){ glDeleteProgram(shaderId); }
+
 void Shader::CompileShaders(){
 
     std::vector<const char*> shaders = {
@@ -124,7 +126,6 @@ static void LinkShader(unsigned int vertexShader,unsigned int fragmentShader,uns
     }
 
 }
-
 
 
 static const std::string ExtractShaderFromLocation(const std::string& Location){

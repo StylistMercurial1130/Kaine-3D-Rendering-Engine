@@ -17,6 +17,7 @@ public:
     void CompileShaders();
     static void ClearShaderProgram();
     void UseShaderProgram();
+    ~Shader();
 
 };
 
