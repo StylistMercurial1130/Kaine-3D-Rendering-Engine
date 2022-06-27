@@ -8,11 +8,7 @@ VertexArray::VertexArray() : index(0){
 }
 
 VertexArrayLayout::VertexArrayLayout(unsigned int size,GLenum type,bool normalized,int offset)
-:Size(size) , Type(type),Normalized(normalized),Offset(offset){
-
-
-
-}
+:Size(size) , Type(type),Normalized(normalized),Offset(offset){}
 
 void VertexArray::BindVertexArray(){
 
@@ -31,13 +27,6 @@ void VertexArray::CreateLayout(unsigned int size,GLenum type,bool normalized,int
 
     glEnableVertexAttribArray(index);
 
-    std::cout   << "Index : " <<index << '\n'
-                << "Size : " <<IndexLayoutMap[index]->Size <<  '\n'
-                << "Type : " <<IndexLayoutMap[index]->Type << '\n'
-                << "Normalized : "<<IndexLayoutMap[index]->Normalized << '\n'
-                << "Stride : "<<stride << '\n'
-                << "Offset : "<<IndexLayoutMap[index]->Offset << '\n';
-                
     glVertexAttribPointer(
         index,
         IndexLayoutMap[index]->Size,
@@ -48,6 +37,12 @@ void VertexArray::CreateLayout(unsigned int size,GLenum type,bool normalized,int
     );
 
     index++;
+
+}
+
+VertexArray::~VertexArray(){
+
+    glDeleteVertexArrays(1,&vertexArrayObjectID);
 
 }
 

@@ -3,9 +3,6 @@
 #include <fstream>
 #include <sstream>
 
-#define FRAGMENT_SHADER 1
-#define VERTEX_SHADER 0
-
 static const std::string ExtractShaderFromLocation(const std::string& Location);
 static void CompileShader(unsigned int vertexShader, unsigned int fragmentShader,
 std::string& vertexShaderSource,std::string& fragmetShaderSource);

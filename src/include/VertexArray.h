@@ -35,6 +35,7 @@ public:
     VertexArray();
     void CreateLayout(unsigned int size,GLenum type,bool normalized,int offset,unsigned int stride,VertexBuffer* vertexBuffer);
     void BindVertexArray();
+    ~VertexArray();
 
 };
 

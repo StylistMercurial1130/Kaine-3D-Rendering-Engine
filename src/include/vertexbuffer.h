@@ -15,8 +15,9 @@ public:
 
     VertexBuffer(std::vector<Vertex> vertices);
     void BindBuffer();
-    void PopulateBuffer(std::vector<Vertex> vertices);
+    void PopulateBuffer(std::vector<Vertex>& vertices);
     static void UnBindBuffer();
+    ~VertexBuffer();
 
 };
 

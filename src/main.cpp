@@ -7,10 +7,10 @@
 #include "include/vertexbuffer.h"
 #include "include/vertex.h"
 #include "include/VertexArray.h"
+#include "include/IndexBuffer.h"
 
 int main(void)
 {
-
 
     GLFWwindow* window;
 
@@ -22,7 +22,7 @@ int main(void)
 
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "Kaine 3d renderer", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -39,6 +39,11 @@ int main(void)
 
     }
 
+    Shader shader = Shader("./shaders/shader.vert","./shaders/shader.frag");
+    shader.CompileShaders();
+    shader.UseShaderProgram();
+
+
     std::vector<Vertex> vertices = {
 
         Vertex{glm::vec3(+0.0f,+1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f)},
@@ -47,23 +52,27 @@ int main(void)
 
     };
 
+    std::vector<unsigned int> indeces = {
+        0,1,2
+    };
+
     VertexBuffer VBO_1(vertices);
     VertexArray VAO_1;
 
     VAO_1.BindVertexArray();
     VAO_1.CreateLayout(3,GL_FLOAT,true,0,sizeof(Vertex),&VBO_1);
 
-    Shader shader = Shader("./shaders/shader.vert","./shaders/shader.frag");
-    shader.CompileShaders();
-    shader.UseShaderProgram();
-
+    IndexBuffer IBO_1;
+    IBO_1.BindIndexBuffer();
+    IBO_1.PopulateIndexBuffer(indeces);
+    
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLES,0,3);
+        glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,nullptr);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
