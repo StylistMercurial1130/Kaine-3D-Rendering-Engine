@@ -1,0 +1,2 @@
+D:\C_C++\MinGW\mingw64\bin\ar.exe qc libsource.a CMakeFiles/source.dir/main.cpp.obj CMakeFiles/source.dir/util.cpp.obj
+D:\C_C++\MinGW\mingw64\bin\ranlib.exe libsource.a
