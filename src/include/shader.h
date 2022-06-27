@@ -10,6 +10,7 @@ private:
 
     unsigned int shaderId;
     const std::string vertexShaderLocation , fragmentShaderLocation;
+    std :: string vertexShaderSource , fragmentShaderSource;
 
 public:
 

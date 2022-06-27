@@ -8,7 +8,7 @@
 
 static const std::string ExtractShaderFromLocation(const std::string& Location);
 static void CompileShader(unsigned int vertexShader, unsigned int fragmentShader,
-const char* vertexShaderSource,const char* fragmetShaderSource);
+std::string& vertexShaderSource,std::string& fragmetShaderSource);
 static int CheckCompileStatus(unsigned int shader);
 static void LinkShader(unsigned int vertexShader,unsigned int fragmentShader,unsigned int shaderId);
 static int CheckLinkStatus(unsigned int shaderId);
@@ -28,10 +28,8 @@ Shader::~Shader(){ glDeleteProgram(shaderId); }
 
 void Shader::CompileShaders(){
 
-    std::vector<const char*> shaders = {
-        ExtractShaderFromLocation(vertexShaderLocation).c_str(),
-        ExtractShaderFromLocation(fragmentShaderLocation).c_str()
-    };
+    vertexShaderSource = ExtractShaderFromLocation(vertexShaderLocation);
+    fragmentShaderSource = ExtractShaderFromLocation(fragmentShaderLocation);
 
     unsigned int vertexShader , fragmentShader;
 
@@ -39,7 +37,7 @@ void Shader::CompileShaders(){
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
     CompileShader(vertexShader,fragmentShader,
-    shaders[VERTEX_SHADER],shaders[FRAGMENT_SHADER]);
+    vertexShaderSource,fragmentShaderSource);
 
     shaderId = glCreateProgram();
 
@@ -50,17 +48,17 @@ void Shader::CompileShaders(){
 
 static int CheckCompileStatus(unsigned int shader){
 
-    int status = 0;
+    int status;
     glGetShaderiv(shader,GL_COMPILE_STATUS, &status);
     
-    if(status == GL_FALSE){
+    if(status != GL_TRUE){
     
+        std::cout << "SHADER ERROR : COMPILE" << '\n';
         int len = 0;
         glGetShaderiv(shader,GL_INFO_LOG_LENGTH,&len);
-        std::vector<char>logMessage(len);
-        glGetShaderInfoLog(shader,len,&len,&logMessage[0]);
-        std::string logMessageString(logMessage.begin(),logMessage.end());
-        std :: cout << logMessageString<< std::endl;
+        char* message = (char*)alloca(len * sizeof(char));
+        glGetShaderInfoLog(shader,len,&len,message);
+        std :: cout << message << '\n';
         return 0;
     
     }
@@ -70,13 +68,16 @@ static int CheckCompileStatus(unsigned int shader){
 }
 
 static void CompileShader(unsigned int vertexShader, unsigned int fragmentShader,
-const char* vertexShaderSource,const char* fragmentShaderSource){
+std::string& vertexShaderSource,std::string& fragmentShaderSource){
 
+    const char* _vertexShaderSource = vertexShaderSource.c_str();
+    const char* _fragmentShaderSource = fragmentShaderSource.c_str();
     
-    glShaderSource(vertexShader,1,&vertexShaderSource,NULL);
-    glShaderSource(fragmentShader,1,&fragmentShaderSource,NULL);
-
+    glShaderSource(vertexShader,1,&_vertexShaderSource,NULL);
     glCompileShader(vertexShader);
+
+    glShaderSource(fragmentShader,1,&_fragmentShaderSource,NULL);
+    glCompileShader(fragmentShader);
 
     if(!CheckCompileStatus(vertexShader) || !CheckCompileStatus(fragmentShader)){
     
@@ -90,19 +91,19 @@ const char* vertexShaderSource,const char* fragmentShaderSource){
 
 static int CheckLinkStatus(unsigned int shaderId){
 
-    int status = 0;
-    glGetShaderiv(shaderId,GL_LINK_STATUS, &status);
+    int status;
+    glGetProgramiv(shaderId,GL_LINK_STATUS, &status);
     
-    if(status == GL_FALSE){
+    if(status != GL_TRUE){
     
+        std :: cout << "SHADER ERROR : LINK " << '\n';
         int len = 0;
-        glGetShaderiv(shaderId,GL_INFO_LOG_LENGTH,&len);
-        std::vector<char>logMessage(len);
-        glGetShaderInfoLog(shaderId,len,&len,&logMessage[0]);
-        std::string logMessageString(logMessage.begin(),logMessage.end());
-        std :: cout << logMessageString<< std::endl;
+        glGetProgramiv(shaderId,GL_INFO_LOG_LENGTH,&len);
+        char* message = (char*)alloca(len * sizeof(char));
+        glGetShaderInfoLog(shaderId,len,&len,message);
+        std :: cout << message << '\n';
         return 0;
-    
+
     }
 
     return 1;
@@ -110,7 +111,6 @@ static int CheckLinkStatus(unsigned int shaderId){
 }
 
 static void LinkShader(unsigned int vertexShader,unsigned int fragmentShader,unsigned int shaderId){
-
 
     glAttachShader(shaderId,vertexShader);
     glAttachShader(shaderId,fragmentShader);
@@ -122,7 +122,7 @@ static void LinkShader(unsigned int vertexShader,unsigned int fragmentShader,uns
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
         glDeleteProgram(shaderId);
-    
+
     }
 
 }
@@ -138,7 +138,11 @@ static const std::string ExtractShaderFromLocation(const std::string& Location){
         stream << line << '\n';
     }
 
+
+    reader.close();
+
     return stream.str();
+
 
 }
 

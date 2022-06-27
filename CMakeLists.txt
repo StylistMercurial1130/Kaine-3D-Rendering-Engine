@@ -22,6 +22,7 @@ add_executable(
     src/util.cpp
     src/shader.cpp
     src/vertexbuffer.cpp
+    src/VertexArray.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src/include)
