@@ -13,7 +13,7 @@ VertexArrayLayout::VertexArrayLayout(unsigned int size,GLenum type,bool normaliz
 void VertexArray::BindVertexArray(){
 
     glBindVertexArray(vertexArrayObjectID);
-
+        
 }
 
 void VertexArray::CreateLayout(unsigned int size,GLenum type,bool normalized,int offset,unsigned int stride,VertexBuffer* vertexBuffer){

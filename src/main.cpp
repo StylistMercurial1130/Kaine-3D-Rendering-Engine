@@ -8,9 +8,12 @@
 #include "include/vertex.h"
 #include "include/VertexArray.h"
 #include "include/IndexBuffer.h"
+#include "include/Textures.h"
 
 int main(void)
 {
+
+    Textures textures("textures/brick_wall.jpg");
 
     GLFWwindow* window;
 
@@ -42,6 +45,7 @@ int main(void)
     Shader shader = Shader("./shaders/shader.vert","./shaders/shader.frag");
     shader.CompileShaders();
     shader.UseShaderProgram();
+
 
     std::vector<Vertex> vertices = {
 

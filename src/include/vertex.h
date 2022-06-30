@@ -1,6 +1,6 @@
 #ifndef __VERTEX_H__
 #define __VERTEX_H__
-#include "vec3.hpp"
+#include "glm/vec3.hpp"
 
 struct Vertex {
 
