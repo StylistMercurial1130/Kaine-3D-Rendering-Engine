@@ -9,20 +9,17 @@
 #include "include/VertexArray.h"
 #include "include/IndexBuffer.h"
 #include "include/Textures.h"
+#include "include/Uniform.h"
 
 int main(void)
 {
 
-    Textures textures("textures/brick_wall.jpg");
-
     GLFWwindow* window;
-
     /* Initialize the library */
     if (!glfwInit()){
         print("message ");
         return -1;
     }
-
 
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(640, 480, "Kaine 3d renderer", NULL, NULL);
@@ -42,16 +39,23 @@ int main(void)
 
     }
 
+    std::cout << "OpenGL version " << glGetString(GL_VERSION) << std::endl;
+
     Shader shader = Shader("./shaders/shader.vert","./shaders/shader.frag");
     shader.CompileShaders();
     shader.UseShaderProgram();
+    
+    Textures textures("textures/brick_wall.jpg");
 
+    UniformHandler uniformHandler;
+    textures.BindTextures(0);
+    uniformHandler.ModifyUniform1i("ourTexture",shader.GetShaderId(),0);
 
     std::vector<Vertex> vertices = {
 
-        Vertex{glm::vec3(+0.0f,+1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f)},
-        Vertex{glm::vec3(-1.0f,-1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f)},
-        Vertex{glm::vec3(+1.0f,-1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f)}
+        Vertex{glm::vec3(+0.0f,+1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f),glm::vec2(+0.5f,+1.0f)},
+        Vertex{glm::vec3(-1.0f,-1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f),glm::vec2(+0.0f,+0.0f)},
+        Vertex{glm::vec3(+1.0f,-1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f),glm::vec2(+1.0f,+0.0f)}
 
     };
 
@@ -64,6 +68,7 @@ int main(void)
 
     VAO_1.BindVertexArray();
     VAO_1.CreateLayout(3,GL_FLOAT,true,0,sizeof(Vertex),&VBO_1);
+    VAO_1.CreateLayout(2,GL_FLOAT,true,24,sizeof(Vertex),&VBO_1);
 
     IndexBuffer IBO_1;
     IBO_1.BindIndexBuffer();
@@ -75,6 +80,7 @@ int main(void)
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
+        textures.BindTextures(0);
         glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,nullptr);
 
         /* Swap front and back buffers */

@@ -142,4 +142,3 @@ static const std::string ExtractShaderFromLocation(const std::string& Location){
 
 
 }
-

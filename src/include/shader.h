@@ -18,6 +18,7 @@ public:
     void CompileShaders();
     static void ClearShaderProgram();
     void UseShaderProgram();
+    unsigned int GetShaderId() {return shaderId;}
     ~Shader();
 
 };

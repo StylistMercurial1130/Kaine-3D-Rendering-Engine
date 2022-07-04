@@ -16,8 +16,11 @@ private:
     
 public:
 
-    template<typename T>
-    void ModifyUniform(std::string uniformName,unsigned int shaderId,T& data);
+    void ModifyUniform3vf(std::string name,unsigned int shaderId,glm::vec3 data);
+    void ModifyUniform2vf(std::string name,unsigned int shaderId,glm::vec2 data);
+    void ModifuUniform4vf(std::string name,unsigned int shaderId,glm::vec4 data);       
+    void ModifyUniform1f(std::string name,unsigned int shaderId,float data);  
+    void ModifyUniform1i(std::string name,unsigned int shaderId,int data);
 
 private:
 

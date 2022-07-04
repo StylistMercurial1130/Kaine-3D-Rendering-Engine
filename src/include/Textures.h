@@ -18,6 +18,7 @@ private:
 public:
 
     Textures(std::string path);
+    void BindTextures(unsigned int slot);
     static void UnbindTexture();
 
 };

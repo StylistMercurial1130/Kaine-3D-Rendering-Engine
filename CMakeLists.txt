@@ -8,6 +8,8 @@ project(Kaine3DRenderer)
 set(CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/dependencies/glfw/lib/cmake/glfw3"
                         "${CMAKE_SOURCE_DIR}/dependencies/glm/cmake/glm")
 
+set(CMAKE_BUILD_TYPE "Debug")
+
 find_package(glfw3 3.3 REQUIRED)
 find_package(glm REQUIRED)
 

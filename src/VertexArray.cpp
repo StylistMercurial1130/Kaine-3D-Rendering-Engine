@@ -25,8 +25,7 @@ void VertexArray::CreateLayout(unsigned int size,GLenum type,bool normalized,int
 
     vertexBuffer->BindBuffer();
 
-    glEnableVertexAttribArray(index);
-
+    glEnableVertexAttribArray(index);   
     glVertexAttribPointer(
         index,
         IndexLayoutMap[index]->Size,
@@ -35,7 +34,7 @@ void VertexArray::CreateLayout(unsigned int size,GLenum type,bool normalized,int
         stride,
         (void*)IndexLayoutMap[index]->Offset
     );
-
+    
     index++;
 
 }
