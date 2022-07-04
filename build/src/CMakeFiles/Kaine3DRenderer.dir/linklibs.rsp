@@ -1,1 +1,0 @@
- D:/Repos/Kaine3DRenderingEngine/dependencies/glfw/lib/libglfw3dll.a ../dependencies/glad/libglad.a -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

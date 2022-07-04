@@ -1,3 +1,0 @@
-D:\CMake\bin\cmake.exe -E rm -f CMakeFiles\Kaine3DRenderer.dir/objects.a
-D:\C_C++\MinGW\mingw64\bin\ar.exe qc CMakeFiles\Kaine3DRenderer.dir/objects.a @CMakeFiles\Kaine3DRenderer.dir\objects1.rsp
-D:\C_C++\MinGW\mingw64\bin\g++.exe -Wl,--whole-archive CMakeFiles\Kaine3DRenderer.dir/objects.a -Wl,--no-whole-archive -o Kaine3DRenderer.exe -Wl,--out-implib,libKaine3DRenderer.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Kaine3DRenderer.dir\linklibs.rsp
