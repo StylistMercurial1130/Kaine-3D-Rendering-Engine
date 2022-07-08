@@ -26,12 +26,13 @@ add_executable(
     ${PROJECT_NAME} 
     src/main.cpp 
     src/util.cpp
-    src/shader.cpp
+    src/Shader.cpp
     src/vertexbuffer.cpp
     src/VertexArray.cpp
     src/IndexBuffer.cpp
     src/Uniform.cpp
     src/Textures.cpp
+    src/Renderer.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src/include)
