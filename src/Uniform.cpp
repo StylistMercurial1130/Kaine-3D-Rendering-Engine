@@ -35,3 +35,12 @@ void UniformHandler::ModifyUniform2vf(std::string uniformName,unsigned int shade
     glUniform2f(uniformDataMap[uniformName],data.x,data.y);
 
 }
+
+void UniformHandler::ModifyUniformMat4f(std::string uniformName,unsigned int shaderId,glm::mat4& data) {
+
+    if(uniformDataMap.find(uniformName) == uniformDataMap.end())
+        PopulateUniformDataMap(uniformName,shaderId);
+    
+    glUniformMatrix4fv(uniformDataMap[uniformName],1,GL_FALSE,glm::value_ptr(data));
+
+}

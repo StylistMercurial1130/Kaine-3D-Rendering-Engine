@@ -53,9 +53,9 @@ int main(void)
 
     std::vector<Vertex> vertices = {
 
-        Vertex{glm::vec3(+0.0f,+1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f),glm::vec2(+0.5f,+1.0f)},
-        Vertex{glm::vec3(-1.0f,-1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f),glm::vec2(+0.0f,+0.0f)},
-        Vertex{glm::vec3(+1.0f,-1.0f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f),glm::vec2(+1.0f,+0.0f)}
+        Vertex{glm::vec3(+0.0f,+0.5f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f),glm::vec2(+0.5f,+1.0f)},
+        Vertex{glm::vec3(-0.5f,-0.5f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f),glm::vec2(+0.0f,+0.0f)},
+        Vertex{glm::vec3(+0.5f,-0.5f,+0.0f),glm::vec3(+0.0f,+0.0f,+0.0f),glm::vec2(+1.0f,+0.0f)}
 
     };
 
@@ -74,11 +74,19 @@ int main(void)
     IBO_1.BindIndexBuffer();
     IBO_1.PopulateIndexBuffer(indeces);
     
+    float val = 0.001f;
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
+
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(val, 0.0f, 0.0f));
+        trans = glm::rotate(trans,(float)glfwGetTime(),glm::vec3(0.0f,0.0f,1.0f));
+        uniformHandler.ModifyUniformMat4f("translation_matrix",shader.GetShaderId(),trans);
+        val = val + 0.001f;
 
         textures.BindTextures(0);
         glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,nullptr);
