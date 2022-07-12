@@ -1,60 +1,59 @@
-#include <iostream>
 #include "include/Renderer.h"
-#include "include/vertexbuffer.h"
-#include "include/VertexArray.h"
 #include "include/IndexBuffer.h"
-#include "include/vertex.h"
-#include "include/Textures.h"
-#include "include/Shader.h"
-#include "include/Uniform.h"
-#include "include/Renderer.h"
 #include "include/Primitives.h"
+#include "include/Renderer.h"
+#include "include/Shader.h"
+#include "include/Textures.h"
+#include "include/Uniform.h"
+#include "include/VertexArray.h"
+#include "include/vertex.h"
+#include "include/vertexbuffer.h"
+#include <iostream>
 
-int Renderer::CreateWindow(const char* windowTitle,int width,int height) {
+int Renderer::CreateWindow(const char* windowTitle, int width, int height)
+{
 
-    if (!glfwInit()) return 0;
+    if (!glfwInit())
+        return 0;
     mRendererwindow = glfwCreateWindow(width, height, "Kaine 3d renderer", NULL, NULL);
     if (!mRendererwindow) {
         glfwTerminate();
         return 0;
     }
     glfwMakeContextCurrent(mRendererwindow);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) return 0;
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        return 0;
     return 1;
-
 }
 
-Renderer::Renderer(const char* windowTitle,int width,int height) {
+Renderer::Renderer(const char* windowTitle, int width, int height)
+{
 
-    if(!CreateWindow(windowTitle,width,height)) {
-        std::cout<<"dummy error message ! some thing has gone wrong, will appear till an error system has be set !" << std::endl;
+    if (!CreateWindow(windowTitle, width, height)) {
+        std::cout << "dummy error message ! some thing has gone wrong, will appear till an error system has be set !" << std::endl;
         return;
     }
     std::cout << "OpenGL version " << glGetString(GL_VERSION) << std::endl;
-
 }
 
-void Renderer::Run() {
+void Renderer::Run()
+{
 
     Triangle triangle;
+    triangle.AddTextures("./textures/brick_wall.jpg");
+    triangle.UseTexture(0, "textureSample2D");
     triangle.BindRenderData();
-
-    while(!glfwWindowShouldClose(mRendererwindow)) {
+    while (!glfwWindowShouldClose(mRendererwindow)) {
         glClear(GL_COLOR_BUFFER_BIT);
-        /**
-         *      do Some Rendering and stuff here !
-         */
-        glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,nullptr);
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
         glfwSwapBuffers(mRendererwindow);
         glfwPollEvents();
     }
-
-
 }
 
-Renderer::~Renderer() {
+Renderer::~Renderer()
+{
 
     glfwDestroyWindow(mRendererwindow);
     glfwTerminate();
-
 }

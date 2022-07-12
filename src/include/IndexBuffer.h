@@ -4,21 +4,17 @@
 #include "glad/glad.h"
 #include <vector>
 
-class IndexBuffer{
+class IndexBuffer {
 
 private:
-
     unsigned int indexBufferObjectId;
 
 public:
-
     IndexBuffer();
     void BindIndexBuffer();
     void PopulateIndexBuffer(std::vector<unsigned int>& indexElements);
     static void UnBindIndexBuffer();
     ~IndexBuffer();
-
 };
-
 
 #endif

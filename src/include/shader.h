@@ -5,22 +5,20 @@
 #include "glm/gtc/type_ptr.hpp"
 #include <iostream>
 
-class Shader{
+class Shader {
 
 private:
     unsigned int shaderId;
-    const std::string vertexShaderLocation , fragmentShaderLocation;
-    std :: string vertexShaderSource , fragmentShaderSource;
+    const std::string vertexShaderLocation, fragmentShaderLocation;
+    std ::string vertexShaderSource, fragmentShaderSource;
 
 public:
-
-    Shader(const std::string& vertexShaderLocation,const std::string& fragmentShaderLocation);
+    Shader(const std::string& vertexShaderLocation, const std::string& fragmentShaderLocation);
     void CompileShaders();
     static void ClearShaderProgram();
     void UseShaderProgram();
-    unsigned int GetShaderId() {return shaderId;}
+    unsigned int GetShaderId() { return shaderId; }
     ~Shader();
-
 };
 
 #endif

@@ -1,31 +1,31 @@
 #include "include/IndexBuffer.h"
 
-IndexBuffer::IndexBuffer(){
+IndexBuffer::IndexBuffer()
+{
 
-    glGenBuffers(1,&indexBufferObjectId);
-
+    glGenBuffers(1, &indexBufferObjectId);
 }
 
-void IndexBuffer::BindIndexBuffer(){
+void IndexBuffer::BindIndexBuffer()
+{
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,indexBufferObjectId);
-
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObjectId);
 }
 
-void IndexBuffer::PopulateIndexBuffer(std::vector<unsigned int>& indexElements){
+void IndexBuffer::PopulateIndexBuffer(std::vector<unsigned int>& indexElements)
+{
 
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER,indexElements.size() * sizeof(unsigned int),&indexElements[0],GL_STATIC_DRAW);
-
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexElements.size() * sizeof(unsigned int), &indexElements[0], GL_STATIC_DRAW);
 }
 
-void IndexBuffer::UnBindIndexBuffer(){
+void IndexBuffer::UnBindIndexBuffer()
+{
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
-
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-IndexBuffer::~IndexBuffer(){
+IndexBuffer::~IndexBuffer()
+{
 
-    glDeleteBuffers(1,&indexBufferObjectId);
-
+    glDeleteBuffers(1, &indexBufferObjectId);
 }

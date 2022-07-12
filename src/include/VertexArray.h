@@ -6,37 +6,30 @@
 #include <map>
 #include <memory>
 
-    
-class VertexArrayLayout{
+class VertexArrayLayout {
 
 public:
-
     unsigned int Size;
     GLenum Type;
     bool Normalized;
     int Offset;
 
-    VertexArrayLayout(unsigned int size,GLenum type,bool normalized,int offset);
-
+    VertexArrayLayout(unsigned int size, GLenum type, bool normalized, int offset);
 };
 
-
-class VertexArray{
+class VertexArray {
 
 private:
-
     unsigned int vertexArrayObjectID;
     unsigned int index;
 
-    std::map<int,std::unique_ptr<VertexArrayLayout>> IndexLayoutMap;
+    std::map<int, std::unique_ptr<VertexArrayLayout>> IndexLayoutMap;
 
 public:
-    
     VertexArray();
-    void CreateLayout(unsigned int size,GLenum type,bool normalized,int offset,unsigned int stride,VertexBuffer* vertexBuffer);
+    void CreateLayout(unsigned int size, GLenum type, bool normalized, int offset, unsigned int stride, VertexBuffer* vertexBuffer);
     void BindVertexArray();
     ~VertexArray();
-
 };
 
 #endif
