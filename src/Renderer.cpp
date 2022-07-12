@@ -7,8 +7,8 @@
 #include "include/Textures.h"
 #include "include/Shader.h"
 #include "include/Uniform.h"
-
-
+#include "include/Renderer.h"
+#include "include/Primitives.h"
 
 int Renderer::CreateWindow(const char* windowTitle,int width,int height) {
 
@@ -36,11 +36,16 @@ Renderer::Renderer(const char* windowTitle,int width,int height) {
 
 void Renderer::Run() {
 
+    Triangle triangle;
+    triangle.BindRenderData();
+
     while(!glfwWindowShouldClose(mRendererwindow)) {
         glClear(GL_COLOR_BUFFER_BIT);
         /**
          *      do Some Rendering and stuff here !
          */
+        glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,nullptr);
+        glfwSwapBuffers(mRendererwindow);
         glfwPollEvents();
     }
 
