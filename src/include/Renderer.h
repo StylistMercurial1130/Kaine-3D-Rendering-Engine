@@ -1,8 +1,8 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-	
+#include <glad/glad.h>
+
 class Renderer {
 public:
     Renderer(const char* windowTitle, int width, int height);

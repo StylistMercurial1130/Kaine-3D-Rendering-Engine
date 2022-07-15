@@ -2,11 +2,10 @@
 #include <iostream>
 #include <vector>
 
-
 int main(void)
 {
 
-    Renderer* renderer = new Renderer("kaine 3d rendering engine", 640, 480);
+    Renderer* renderer = new Renderer("kaine 3d rendering engine", 800, 800);
     renderer->Run();
 
     return 0;

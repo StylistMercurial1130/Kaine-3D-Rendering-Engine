@@ -21,8 +21,6 @@ protected:
     IndexBuffer mIndexbuffer;
     std::vector<Vertex> mVertexdata;
     std::vector<unsigned int> mIndexBufferLayout;
-    Shader mShader;
-    UniformHandler mUniformhandler;
     std::vector<Textures> mTextures;
     int mTextureindex;
 
@@ -30,11 +28,10 @@ private:
     void SetupPrimitive(std::vector<Vertex>&, std::vector<unsigned int>&);
 
 public:
+    Shader mShader;
+    UniformHandler mUniformhandler;
     Primitive(std::vector<Vertex>&, std::vector<unsigned int>&);
-    Primitive(const std::string&,
-        const std::string&,
-        std::vector<Vertex>&,
-        std::vector<unsigned int>&);
+    Primitive(const std::string&, const std::string&, std::vector<Vertex>&, std::vector<unsigned int>&);
     void BindRenderData();
     void AddTextures(const std::string&);
     void UseTexture(int, const std::string&);
@@ -43,20 +40,22 @@ public:
 class Triangle : public Primitive {
 public:
     Triangle();
-    Triangle(const std::string&,
-        const std::string&,
-        std::vector<Vertex>&,
-        std::vector<unsigned int>&);
+    Triangle(std::vector<Vertex>&, std::vector<unsigned int>&);
+    Triangle(const std::string&, const std::string&, std::vector<Vertex>&, std::vector<unsigned int>&);
 };
 
 class Square : public Primitive {
 public:
     Square();
-    Square(const std::string&,
-        const std::string&,
-        std::vector<Vertex>&,
-        std::vector<unsigned int>&);
+    Square(std::vector<Vertex>&, std::vector<unsigned int>&);
+    Square(const std::string&, const std::string&, std::vector<Vertex>&, std::vector<unsigned int>&);
+};
+
+class Pyramid : public Primitive {
+public:
+    Pyramid();
+    Pyramid(std::vector<Vertex>&, std::vector<unsigned int>&);
+    Pyramid(const std::string&, const std::string&, std::vector<Vertex>&, std::vector<unsigned int>&);
 };
 
 #endif
-	

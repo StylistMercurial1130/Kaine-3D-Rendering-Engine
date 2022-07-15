@@ -1,6 +1,6 @@
 #include "include/Textures.h"
 
-Textures::Textures(std::string path)
+Textures::Textures(const std::string& path)
     : filePath(path)
     , width(0)
     , height(0)
@@ -12,7 +12,7 @@ Textures::Textures(std::string path)
     stbi_set_flip_vertically_on_load(1);
     textureBuffer = stbi_load(filePath.c_str(), &width, &height, &bpp, 0);
     if (textureBuffer == nullptr) {
-        std ::cout << "texture " <<  filePath << " not loaded !" << std::endl;
+        std ::cout << "texture " << filePath << " not loaded !" << std::endl;
         return;
     }
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

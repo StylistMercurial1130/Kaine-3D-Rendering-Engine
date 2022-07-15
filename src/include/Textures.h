@@ -14,7 +14,7 @@ private:
     int bpp;
 
 public:
-    Textures(std::string path);
+    Textures(const std::string& path);
     void BindTextures(unsigned int slot);
     static void UnbindTexture();
 };
